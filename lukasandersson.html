@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUKAS ANDERSSON – OFFICIELL HEMSIDA</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Bangers&family=Comic+Neue:wght@700&display=swap');
+
+  :root {
+    --neon: #ff00ff;
+    --lime: #00ff00;
+    --gold: #ffd700;
+    --red: #ff0000;
+    --cyan: #00ffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #000;
+    color: #fff;
+    font-family: 'Comic Neue', cursive;
+    overflow-x: hidden;
+    cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text y='28' font-size='28'>👻</text></svg>"), auto;
+  }
+
+  /* STARFIELD */
+  #starfield {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* MARQUEE BANNER */
+  .marquee-wrap {
+    background: var(--neon);
+    padding: 6px 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+  }
+  .marquee-text {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 12s linear infinite;
+    font-family: 'Bangers', cursive;
+    font-size: 1.4rem;
+    letter-spacing: 4px;
+    color: #000;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(100vw); }
+    100% { transform: translateX(-100%); }
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    padding: 30px 20px 0;
+  }
+
+  .title {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(3rem, 12vw, 8rem);
+    letter-spacing: 8px;
+    color: var(--gold);
+    text-shadow:
+      0 0 10px var(--gold),
+      0 0 30px var(--gold),
+      0 0 60px orange,
+      4px 4px 0 #a00,
+      8px 8px 0 #600;
+    animation: titleWiggle 3s ease-in-out infinite, rainbow 4s linear infinite;
+  }
+  @keyframes titleWiggle {
+    0%, 100% { transform: rotate(-1deg) scale(1); }
+    25% { transform: rotate(1.5deg) scale(1.02); }
+    50% { transform: rotate(-0.5deg) scale(0.99); }
+    75% { transform: rotate(2deg) scale(1.01); }
+  }
+  @keyframes rainbow {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+  }
+
+  .subtitle {
+    font-family: 'Creepster', cursive;
+    font-size: clamp(1rem, 4vw, 2rem);
+    color: var(--cyan);
+    text-shadow: 0 0 10px var(--cyan);
+    margin: 8px 0 20px;
+    animation: blink 1.5s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* GIF CONTAINER */
+  .gif-zone {
+    position: relative;
+    display: inline-block;
+    margin: 0 auto;
+  }
+  .gif-zone img {
+    max-width: min(400px, 90vw);
+    border: 4px solid var(--neon);
+    border-radius: 12px;
+    box-shadow: 0 0 40px var(--neon), 0 0 80px var(--neon);
+    animation: gifFloat 4s ease-in-out infinite, spinBorder 8s linear infinite;
+  }
+  @keyframes gifFloat {
+    0%, 100% { transform: translateY(0) rotate(-1deg); }
+    50% { transform: translateY(-15px) rotate(1deg); }
+  }
+  @keyframes spinBorder {
+    0% { border-color: var(--neon); box-shadow: 0 0 40px var(--neon); }
+    25% { border-color: var(--lime); box-shadow: 0 0 40px var(--lime); }
+    50% { border-color: var(--cyan); box-shadow: 0 0 40px var(--cyan); }
+    75% { border-color: var(--gold); box-shadow: 0 0 40px var(--gold); }
+    100% { border-color: var(--neon); box-shadow: 0 0 40px var(--neon); }
+  }
+
+  .sparkle {
+    position: absolute;
+    pointer-events: none;
+    font-size: 1.5rem;
+    animation: floatSpark 3s ease-in-out infinite;
+  }
+  .sp1 { top: -20px; left: 10px; animation-delay: 0s; }
+  .sp2 { top: -10px; right: 5px; animation-delay: 0.5s; }
+  .sp3 { bottom: 10px; left: -20px; animation-delay: 1s; }
+  .sp4 { bottom: -10px; right: -10px; animation-delay: 1.5s; }
+  @keyframes floatSpark {
+    0%, 100% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    50% { transform: translateY(-20px) rotate(180deg); opacity: 0.4; }
+  }
+
+  /* BUTTONS SECTION */
+  .btn-section {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    padding: 30px 20px;
+  }
+
+  .section-header {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    color: var(--lime);
+    text-shadow: 0 0 20px var(--lime);
+    margin-bottom: 20px;
+    letter-spacing: 4px;
+  }
+
+  .btn-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .free-btn {
+    position: relative;
+    padding: 14px 28px;
+    font-family: 'Bangers', cursive;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    letter-spacing: 2px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.1s;
+    text-decoration: none;
+    display: inline-block;
+    animation: btnPulse 2s ease-in-out infinite;
+  }
+  .free-btn:hover { transform: scale(1.1) rotate(-2deg); }
+  .free-btn:active { transform: scale(0.95); }
+  @keyframes btnPulse {
+    0%, 100% { box-shadow: 0 0 10px currentColor; }
+    50% { box-shadow: 0 0 30px currentColor, 0 0 60px currentColor; }
+  }
+
+  .btn-1 { background: #ff00cc; color: #fff; animation-delay: 0s; }
+  .btn-2 { background: #00cc44; color: #000; animation-delay: 0.3s; }
+  .btn-3 { background: #ff6600; color: #fff; animation-delay: 0.6s; }
+  .btn-4 { background: #6600ff; color: #fff; animation-delay: 0.9s; }
+  .btn-5 { background: #ffcc00; color: #000; animation-delay: 0.2s; }
+  .btn-6 { background: #00ccff; color: #000; animation-delay: 0.5s; }
+  .btn-7 { background: #ff3333; color: #fff; animation-delay: 0.8s; }
+  .btn-8 { background: #33ff33; color: #000; animation-delay: 0.1s; }
+
+  .btn-badge {
+    position: absolute;
+    top: -8px; right: -8px;
+    background: var(--red);
+    color: #fff;
+    font-size: 0.6rem;
+    padding: 2px 5px;
+    border-radius: 20px;
+    font-family: 'Comic Neue', sans-serif;
+    animation: badgeSpin 3s linear infinite;
+  }
+  @keyframes badgeSpin {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.2); }
+    100% { transform: rotate(360deg) scale(1); }
+  }
+
+  /* COUNTER */
+  .counter-box {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    padding: 15px;
+    background: rgba(255,0,255,0.1);
+    border: 1px solid var(--neon);
+    margin: 10px auto;
+    max-width: 400px;
+    border-radius: 10px;
+    font-family: 'Bangers', cursive;
+    font-size: 1.2rem;
+    color: var(--neon);
+    text-shadow: 0 0 10px var(--neon);
+  }
+  #visitorCount { font-size: 2rem; color: var(--gold); }
+
+  /* FUN FACTS SECTION */
+  .facts-section {
+    position: relative;
+    z-index: 5;
+    padding: 20px;
+    max-width: 900px;
+    margin: 20px auto;
+  }
+  .fact-card {
+    background: rgba(0,255,0,0.07);
+    border: 2px solid var(--lime);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    font-size: 1rem;
+    line-height: 1.5;
+    animation: factSlide 0.5s ease-out both;
+  }
+  .fact-card:nth-child(1) { animation-delay: 0.1s; }
+  .fact-card:nth-child(2) { animation-delay: 0.2s; }
+  .fact-card:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes factSlide {
+    from { opacity: 0; transform: translateX(-40px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* GHOST PARADE */
+  .ghost-parade {
+    position: fixed;
+    bottom: 60px;
+    width: 100%;
+    pointer-events: none;
+    z-index: 2;
+    height: 60px;
+  }
+  .ghost {
+    position: absolute;
+    font-size: 2rem;
+    animation: ghostWalk linear infinite;
+  }
+  @keyframes ghostWalk {
+    0% { left: -80px; opacity: 0; }
+    5% { opacity: 1; }
+    95% { opacity: 1; }
+    100% { left: 110%; opacity: 0; }
+  }
+
+  /* BOTTOM MARQUEE */
+  .marquee-wrap-2 {
+    background: var(--lime);
+    padding: 6px 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+    margin-top: 30px;
+  }
+  .marquee-text-2 {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee2 18s linear infinite;
+    font-family: 'Bangers', cursive;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    color: #000;
+  }
+  @keyframes marquee2 {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100vw); }
+  }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.8rem;
+    color: #666;
+    font-style: italic;
+  }
+
+  /* FLYING EMOJIS */
+  .fly-emoji {
+    position: fixed;
+    font-size: 2rem;
+    pointer-events: none;
+    z-index: 100;
+    animation: flyUp 4s ease-in forwards;
+  }
+  @keyframes flyUp {
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-300px) scale(2); }
+  }
+
+  /* MODAL */
+  .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal.active { display: flex; }
+  .modal-box {
+    background: #1a001a;
+    border: 3px solid var(--neon);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    max-width: 420px;
+    width: 90%;
+    animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  }
+  @keyframes modalPop {
+    0% { transform: scale(0) rotate(-10deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0); opacity: 1; }
+  }
+  .modal-title {
+    font-family: 'Bangers', cursive;
+    font-size: 2.5rem;
+    color: var(--gold);
+    text-shadow: 0 0 20px var(--gold);
+    margin-bottom: 15px;
+    letter-spacing: 3px;
+  }
+  .modal-text {
+    font-size: 1.1rem;
+    color: var(--lime);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .modal-close {
+    background: var(--neon);
+    color: #000;
+    border: none;
+    padding: 12px 30px;
+    font-family: 'Bangers', cursive;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.1s;
+  }
+  .modal-close:hover { transform: scale(1.1); }
+</style>
+</head>
+<body>
+
+<!-- STARFIELD -->
+<canvas id="starfield"></canvas>
+
+<!-- TOP MARQUEE -->
+<div class="marquee-wrap">
+  <span class="marquee-text">⭐ VÄLKOMMEN TILL LUKAS ANDERSSONS OFFICIELLA HEMSIDA ⭐ DU ÄR GÄST #<span id="topCount">1,337</span> ⭐ KLICKA PÅ ALLT ⭐ DET ÄR GRATIS ⭐ KLICKA ⭐ </span>
+</div>
+
+<!-- HERO SECTION -->
+<div class="hero">
+  <div class="title">LUKAS ANDERSSON</div>
+  <div class="subtitle">⚡ VÄRLDENS COOLASTE PERSON ⚡</div>
+
+  <div class="gif-zone">
+    <span class="sparkle sp1">✨</span>
+    <span class="sparkle sp2">🌟</span>
+    <span class="sparkle sp3">💫</span>
+    <span class="sparkle sp4">⭐</span>
+    <img src="Gholos.gif" alt="Den legendariske Lukas" />
+  </div>
+
+  <div style="margin-top: 20px; font-size: 1.2rem; color: var(--cyan); text-shadow: 0 0 8px var(--cyan);">
+    👆 DET ÄR LUKAS!! TITTA!! 👆
+  </div>
+</div>
+
+<!-- VISITOR COUNTER -->
+<div class="counter-box">
+  🌐 BESÖKARE IDAG: <span id="visitorCount">0</span> 🌐
+</div>
+
+<!-- FREE DOWNLOAD BUTTONS -->
+<div class="btn-section">
+  <div class="section-header">🎁 GRATIS NEDLADDNINGAR 🎁</div>
+  <div class="btn-grid">
+    <button class="free-btn btn-1" onclick="showModal('🎵 Lukasens Diss Track (feat. Inte dig)')">
+      ⬇️ LADDA NED LUKAS LÅTEN
+      <span class="btn-badge">GRATIS!</span>
+    </button>
+    <button class="free-btn btn-2" onclick="showModal('📸 Lukasens Selfies (10,000+ bilder)')">
+      ⬇️ LADDA NED ALLA SELFIES
+      <span class="btn-badge">HOT!</span>
+    </button>
+    <button class="free-btn btn-3" onclick="showModal('🏆 Lukasens Troféer (alla 47 stycken)')">
+      ⬇️ LADDA NED TROFÉ-PACK
+      <span class="btn-badge">NY!</span>
+    </button>
+    <button class="free-btn btn-4" onclick="showModal('🧠 Lukasens Visdom (547 citat)')">
+      ⬇️ LADDA NED VISDOMSBOKEN
+      <span class="btn-badge">💡</span>
+    </button>
+    <button class="free-btn btn-5" onclick="showModal('🍕 Lukasens Favoritrecept (pizza m.m.)')">
+      ⬇️ LADDA NED RECEPTBOKEN
+      <span class="btn-badge">YUM!</span>
+    </button>
+    <button class="free-btn btn-6" onclick="showModal('🌟 Lukas Skrikljud Pack (Ultra HD)')">
+      ⬇️ LADDA NED SKRIKLJUDEN
+      <span class="btn-badge">🔊</span>
+    </button>
+    <button class="free-btn btn-7" onclick="showModal('💪 Lukas Träningsprogram (dag 1: vila)')">
+      ⬇️ LADDA NED TRÄNINGSPROG.
+      <span class="btn-badge">FIT!</span>
+    </button>
+    <button class="free-btn btn-8" onclick="showModal('🎮 Lukas RPG-karaktär (level 9999)')">
+      ⬇️ LADDA NED LUKAS-SPELET
+      <span class="btn-badge">EXE</span>
+    </button>
+  </div>
+</div>
+
+<!-- FUN FACTS -->
+<div class="facts-section">
+  <div class="section-header" style="text-align:center">📋 FAKTA OM LUKAS 📋</div>
+  <div class="fact-card">🎂 <strong>Födelsedag:</strong> Okänd, men varje dag med Lukas känns som hans födelsedag.</div>
+  <div class="fact-card">🦸 <strong>Superkraft:</strong> Kan äta en hel pizza och fortfarande säga "jag är inte hungrig".</div>
+  <div class="fact-card">🌍 <strong>Resemål:</strong> Har besökt 0 länder men berättar om det som om han besökt 47.</div>
+</div>
+
+<!-- GHOST PARADE -->
+<div class="ghost-parade" id="ghostParade"></div>
+
+<!-- BOTTOM MARQUEE -->
+<div class="marquee-wrap-2">
+  <span class="marquee-text-2">🔥 COPYRIGHT © LUKAS ANDERSSON 2025 – ALLA RÄTTIGHETER FÖRBEHÅLLNA (FÖRUTOM DOM SOM INTE ÄR DET) 🔥 RING INTE 🔥 SKICKA INTE BREV 🔥 LUKAS SVARAR ÄNDÅ INTE 🔥</span>
+</div>
+
+<footer>
+  ⚡ Hemsida skapad av ingen med yrke. Lukas godkänner inte detta. ⚡<br>
+  🌐 Bäst upplevd i Internet Explorer 6.0 🌐
+</footer>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <div class="modal-title">🎉 GRATTIS! 🎉</div>
+    <div class="modal-text" id="modalText">...</div>
+    <div style="font-size:0.85rem; color:#888; margin-bottom:15px;">
+      * Nedladdningen börjar aldrig. Det är fortfarande gratis.
+    </div>
+    <button class="modal-close" onclick="closeModal()">STÄNG (GRATIS)</button>
+  </div>
+</div>
+
+<script>
+  // STARFIELD
+  const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    stars = Array.from({length: 120}, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 2 + 0.5,
+      speed: Math.random() * 0.5 + 0.1,
+      hue: Math.random() * 360
+    }));
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      s.hue += 0.5;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `hsl(${s.hue}, 100%, 70%)`;
+      ctx.shadowBlur = 6;
+      ctx.shadowColor = `hsl(${s.hue}, 100%, 70%)`;
+      ctx.fill();
+      s.y += s.speed;
+      if (s.y > canvas.height) { s.y = 0; s.x = Math.random() * canvas.width; }
+    });
+    requestAnimationFrame(drawStars);
+  }
+  drawStars();
+
+  // VISITOR COUNTER
+  let count = 0;
+  const target = 13337 + Math.floor(Math.random() * 500);
+  const el = document.getElementById('visitorCount');
+  const topEl = document.getElementById('topCount');
+  const inc = Math.ceil(target / 60);
+  const interval = setInterval(() => {
+    count = Math.min(count + inc, target);
+    el.textContent = count.toLocaleString('sv-SE');
+    topEl.textContent = count.toLocaleString('sv-SE');
+    if (count >= target) clearInterval(interval);
+  }, 30);
+
+  // GHOST PARADE
+  const ghosts = ['👻','💀','🎃','🦇','🐙','👾','🤡','🧟','👁️','🫀'];
+  const parade = document.getElementById('ghostParade');
+  function spawnGhost() {
+    const g = document.createElement('div');
+    g.className = 'ghost';
+    g.textContent = ghosts[Math.floor(Math.random() * ghosts.length)];
+    const dur = 8 + Math.random() * 10;
+    const top = Math.random() * 30;
+    g.style.cssText = `animation-duration:${dur}s; animation-delay:${Math.random()*5}s; bottom:${top}px; font-size:${1.5 + Math.random()}rem;`;
+    parade.appendChild(g);
+    setTimeout(() => g.remove(), (dur + 6) * 1000);
+  }
+  for (let i = 0; i < 8; i++) setTimeout(spawnGhost, i * 1200);
+  setInterval(spawnGhost, 2000);
+
+  // MODAL
+  function showModal(text) {
+    document.getElementById('modalText').textContent = '⬇️ Laddar ner: ' + text + '...';
+    document.getElementById('modal').classList.add('active');
+    spawnEmojis();
+  }
+  function closeModal() {
+    document.getElementById('modal').classList.remove('active');
+  }
+  document.getElementById('modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('modal')) closeModal();
+  });
+
+  // FLYING EMOJIS on button click
+  const funEmojis = ['🎉','⭐','💥','🔥','✨','🎊','💫','🌟','👻','🦄'];
+  function spawnEmojis() {
+    for (let i = 0; i < 6; i++) {
+      const e = document.createElement('div');
+      e.className = 'fly-emoji';
+      e.textContent = funEmojis[Math.floor(Math.random() * funEmojis.length)];
+      e.style.left = (10 + Math.random() * 80) + 'vw';
+      e.style.bottom = (10 + Math.random() * 20) + 'vh';
+      e.style.animationDelay = (Math.random() * 0.5) + 's';
+      document.body.appendChild(e);
+      setTimeout(() => e.remove(), 4500);
+    }
+  }
+
+  // CLICK ANYWHERE = EMOJI
+  document.addEventListener('click', e => {
+    const em = document.createElement('div');
+    em.className = 'fly-emoji';
+    em.textContent = funEmojis[Math.floor(Math.random() * funEmojis.length)];
+    em.style.left = e.clientX + 'px';
+    em.style.top = e.clientY + 'px';
+    em.style.position = 'fixed';
+    document.body.appendChild(em);
+    setTimeout(() => em.remove(), 4200);
+  });
+</script>
+</body>
+</html>
