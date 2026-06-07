@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Våxtorpsskolan – Laholms kommun</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-dark: #1a4a2e;
+    --green-mid: #2d7a4f;
+    --green-light: #4caf80;
+    --green-pale: #e8f5ee;
+    --amber: #e8a020;
+    --amber-light: #fdf3e0;
+    --text: #1c2a20;
+    --text-muted: #4a6355;
+    --white: #ffffff;
+    --off-white: #f7faf8;
+    --border: #d0e4d8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--green-dark);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 64px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+
+  .nav-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    color: var(--white);
+    letter-spacing: 0.01em;
+  }
+
+  .nav-logo span { color: var(--green-light); }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  /* HERO */
+  .hero {
+    background: var(--green-dark);
+    position: relative;
+    overflow: hidden;
+    padding: 5rem 2.5rem 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    min-height: 500px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: rgba(76,175,128,0.08);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 30%;
+    width: 250px; height: 250px;
+    border-radius: 50%;
+    background: rgba(76,175,128,0.05);
+  }
+
+  .hero-text { position: relative; z-index: 1; }
+
+  .hero-kicker {
+    display: inline-block;
+    background: rgba(76,175,128,0.2);
+    color: var(--green-light);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 3.4rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--green-light);
+  }
+
+  .hero-desc {
+    color: rgba(255,255,255,0.72);
+    font-size: 1.05rem;
+    max-width: 440px;
+    margin-bottom: 2rem;
+  }
+
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--green-light);
+    color: var(--green-dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .hero-cta:hover { background: #5ec490; transform: translateY(-1px); }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    position: relative; z-index: 1;
+  }
+
+  .stat-box {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .stat-box .num {
+    font-family: 'Fraunces', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--green-light);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-box .label {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.85rem;
+  }
+
+  /* SECTIONS COMMON */
+  section { padding: 5rem 2.5rem; }
+
+  .section-kicker {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 0.6rem;
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--green-dark);
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .section-lead {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 560px;
+    margin-bottom: 3rem;
+  }
+
+  /* OM OSS */
+  #om-oss { background: var(--off-white); }
+
+  .om-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .values-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+
+  .values-list li {
+    display: flex; align-items: flex-start; gap: 0.8rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+  }
+
+  .values-list .icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    background: var(--green-pale);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+
+  .values-list .v-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--green-dark);
+    margin-bottom: 0.2rem;
+  }
+
+  .values-list .v-text {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+  }
+
+  .about-image-block {
+    background: var(--green-pale);
+    border-radius: 16px;
+    padding: 2.5rem;
+    display: flex; flex-direction: column; gap: 1.2rem;
+  }
+
+  .school-fact {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 1.2rem 1.4rem;
+    border-left: 4px solid var(--green-mid);
+  }
+
+  .school-fact .fact-label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+  .school-fact .fact-value { font-weight: 600; font-size: 1rem; color: var(--green-dark); }
+
+  /* UNDERVISNING */
+  #undervisning { background: var(--white); }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+  }
+
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.6rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26,74,46,0.08); }
+
+  .card-icon {
+    width: 48px; height: 48px;
+    background: var(--green-pale);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--green-dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .card p { font-size: 0.9rem; color: var(--text-muted); }
+
+  /* FRITIDS */
+  #fritids {
+    background: var(--green-dark);
+    color: var(--white);
+  }
+
+  #fritids .section-title { color: var(--white); }
+  #fritids .section-kicker { color: var(--green-light); }
+  #fritids .section-lead { color: rgba(255,255,255,0.7); }
+
+  .fritids-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+
+  .fritids-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 1.8rem;
+  }
+
+  .fritids-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    color: var(--green-light);
+    margin-bottom: 0.6rem;
+  }
+
+  .fritids-card p { color: rgba(255,255,255,0.7); font-size: 0.92rem; }
+
+  /* NYHETER */
+  #nyheter { background: var(--off-white); }
+
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+  }
+
+  .news-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+
+  .news-card:hover { transform: translateY(-3px); }
+
+  .news-card-img {
+    height: 140px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+  }
+
+  .news-card-body { padding: 1.2rem 1.4rem 1.4rem; }
+
+  .news-date {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.04em;
+  }
+
+  .news-card-body h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--green-dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .news-card-body p { font-size: 0.88rem; color: var(--text-muted); }
+
+  /* KONTAKT */
+  #kontakt { background: var(--white); }
+
+  .kontakt-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .kontakt-info { display: flex; flex-direction: column; gap: 1.2rem; }
+
+  .kontakt-row {
+    display: flex; gap: 1rem;
+    background: var(--off-white);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    align-items: flex-start;
+  }
+
+  .kontakt-row .k-icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    background: var(--green-pale);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+
+  .kontakt-row .k-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 0.2rem;
+  }
+
+  .kontakt-row .k-value {
+    font-weight: 500;
+    color: var(--green-dark);
+    font-size: 0.95rem;
+  }
+
+  .map-block {
+    background: var(--green-pale);
+    border-radius: 16px;
+    min-height: 320px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 1rem;
+    border: 1px solid var(--border);
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .map-block .map-icon { font-size: 3rem; }
+  .map-block p { color: var(--text-muted); font-size: 0.9rem; }
+  .map-block a {
+    display: inline-block;
+    background: var(--green-dark);
+    color: var(--white);
+    padding: 0.65rem 1.4rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    margin-top: 0.5rem;
+    transition: background 0.2s;
+  }
+  .map-block a:hover { background: var(--green-mid); }
+
+  /* FOOTER */
+  footer {
+    background: #111d15;
+    color: rgba(255,255,255,0.6);
+    padding: 3rem 2.5rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .footer-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    color: var(--white);
+    margin-bottom: 0.6rem;
+  }
+
+  .footer-logo span { color: var(--green-light); }
+
+  footer p { font-size: 0.88rem; line-height: 1.8; }
+
+  footer h4 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 1rem;
+  }
+
+  footer ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+
+  footer ul a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+
+  footer ul a:hover { color: var(--white); }
+
+  .footer-bottom {
+    background: #0c1610;
+    padding: 1rem 2.5rem;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.35);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .om-grid, .kontakt-grid { grid-template-columns: 1fr; }
+    .cards-grid, .news-grid { grid-template-columns: 1fr 1fr; }
+    .fritids-grid { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; }
+    nav { padding: 0 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    .hero { padding: 3rem 1.5rem 4rem; }
+    section { padding: 3.5rem 1.5rem; }
+  }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 2.4rem; }
+    .cards-grid, .news-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Våxtorps<span>skolan</span></div>
+  <ul class="nav-links">
+    <li><a href="#om-oss">Om oss</a></li>
+    <li><a href="#undervisning">Undervisning</a></li>
+    <li><a href="#fritids">Fritids</a></li>
+    <li><a href="#nyheter">Nyheter</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-kicker">Laholms kommun · Halland</div>
+    <h1>En trygg skola<br>för <em>alla</em> elever</h1>
+    <p class="hero-desc">Våxtorpsskolan är en mellan- och högstadieskola där trygghet, studiero och goda lärmiljöer skapar förutsättningar för varje elevs utveckling.</p>
+    <a class="hero-cta" href="#kontakt">Kontakta oss →</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-box">
+      <div class="num">~375</div>
+      <div class="label">Elever</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">F–9</div>
+      <div class="label">Årskurser</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">2</div>
+      <div class="label">Fritidsavdelningar</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">100%</div>
+      <div class="label">Behöriga lärare</div>
+    </div>
+  </div>
+</section>
+
+<!-- OM OSS -->
+<section id="om-oss">
+  <div class="om-grid">
+    <div>
+      <div class="section-kicker">Om skolan</div>
+      <h2 class="section-title">Trygghet och studiero i fokus</h2>
+      <p class="section-lead">Våxtorpsskolan är en en-parallellig skola i Laholms kommun. Vi arbetar aktivt för att varje elev ska känna sig trygg, respekterad och ha goda förutsättningar att lära sig och växa.</p>
+      <ul class="values-list">
+        <li>
+          <div class="icon">🤝</div>
+          <div>
+            <div class="v-title">Trygghet för alla</div>
+            <div class="v-text">Alla ska känna sig trygga och ha god studiero i skolan varje dag.</div>
+          </div>
+        </li>
+        <li>
+          <div class="icon">🌱</div>
+          <div>
+            <div class="v-title">Individuell utveckling</div>
+            <div class="v-text">Vi arbetar för att varje elev ska utvecklas så långt de kan utifrån sina egna förmågor.</div>
+          </div>
+        </li>
+        <li>
+          <div class="icon">⚖️</div>
+          <div>
+            <div class="v-title">Respekt och jämlikhet</div>
+            <div class="v-text">Alla behandlas rättvist och med respekt. Vi följer aktivt upp och motverkar kränkande behandling.</div>
+          </div>
+        </li>
+        <li>
+          <div class="icon">📊</div>
+          <div>
+            <div class="v-title">Formativ bedömning</div>
+            <div class="v-text">Vi följer upp och utvärderar elevernas kunskaper och mående löpande genom kartläggningar och trygghetsenkäter.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="about-image-block">
+      <div class="school-fact">
+        <div class="fact-label">Adress</div>
+        <div class="fact-value">Våxtorp, 31280 Laholm</div>
+      </div>
+      <div class="school-fact">
+        <div class="fact-label">Skolform</div>
+        <div class="fact-value">Grundskola, kommunal</div>
+      </div>
+      <div class="school-fact">
+        <div class="fact-label">Huvudman</div>
+        <div class="fact-value">Laholms kommun</div>
+      </div>
+      <div class="school-fact">
+        <div class="fact-label">Telefon</div>
+        <div class="fact-value">0430-150 82</div>
+      </div>
+      <div class="school-fact">
+        <div class="fact-label">E-post</div>
+        <div class="fact-value">vaxtorpsskolan@edu.laholm.se</div>
+      </div>
+      <div class="school-fact">
+        <div class="fact-label">Trygghetsteam</div>
+        <div class="fact-value">Aktivt förebyggande &amp; åtgärdande arbete</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UNDERVISNING -->
+<section id="undervisning">
+  <div class="section-kicker">Undervisning</div>
+  <h2 class="section-title">Utbildning med kvalitet</h2>
+  <p class="section-lead">Undervisningen bedrivs av behöriga lärare och präglas av engagemang, tydliga mål och ett varierat arbetssätt som möter varje elevs behov.</p>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">📚</div>
+      <h3>Behöriga lärare</h3>
+      <p>All undervisning bedrivs med god, behörig kompetens som säkerställer hög kvalitet i varje klassrum.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎯</div>
+      <h3>Formativ bedömning</h3>
+      <p>Vi arbetar med formativ bedömning för att synliggöra lärandet och ge eleverna kontinuerlig återkoppling.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🧠</div>
+      <h3>NPF-kompetens</h3>
+      <p>Personalen är fortbildad i neuropsykiatriska funktionsnedsättningar för att kunna möta alla elevers behov.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌐</div>
+      <h3>Språkutvecklande arbetssätt</h3>
+      <p>Vi arbetar språk- och kunskapsutvecklande i alla ämnen för att stärka elevernas kommunikativa förmågor.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔍</div>
+      <h3>Systematiskt kvalitetsarbete</h3>
+      <p>Kontinuerlig uppföljning och utvärdering av verksamheten för att ständigt förbättra lärmiljön.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤗</div>
+      <h3>Trygghetsteam</h3>
+      <p>Dedikerat trygghetsteam som arbetar förebyggande, främjande och åtgärdande med värdegrundsfrågor.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FRITIDS -->
+<section id="fritids">
+  <div class="section-kicker">Fritidshem</div>
+  <h2 class="section-title">Meningsfull tid efter skolan</h2>
+  <p class="section-lead">På Våxtorpsskolan finns två fritidsavdelningar med utbildad personal som följer eleverna hela dagen – från skolans start till fritidshemmets stängning.</p>
+  <div class="fritids-grid">
+    <div class="fritids-card">
+      <h3>🔨 Snickerboa</h3>
+      <p>Fritidsavdelning för elever i förskoleklass till och med årskurs 2. Egna lokaler med aktiviteter anpassade för de yngre barnen. Varje dag vistas barnen utomhus i samlad grupp.</p>
+    </div>
+    <div class="fritids-card">
+      <h3>🏰 Mattisborgen</h3>
+      <p>Fritidsavdelning för de äldre eleverna i år 3–6. Egna lokaler med aktiviteter och möjligheter anpassade till åldersgruppen och elevernas intressen.</p>
+    </div>
+    <div class="fritids-card">
+      <h3>📅 Årshjul &amp; Temaarbete</h3>
+      <p>Fritidshemmen följer två årshjul – ett för aktiviteter inom olika teman och ett för att utveckla barnens förmågor på ett strukturerat och roligt sätt.</p>
+    </div>
+    <div class="fritids-card">
+      <h3>🤝 Sammanhållet lag</h3>
+      <p>All personal på fritidshemmen arbetar även i skolan under skoltid, vilket ger oss en god helhetsbild över elevernas hela dag och välmående.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NYHETER -->
+<section id="nyheter">
+  <div class="section-kicker">Aktuellt</div>
+  <h2 class="section-title">Nyheter från skolan</h2>
+  <p class="section-lead">Håll dig uppdaterad om vad som händer på Våxtorpsskolan.</p>
+  <div class="news-grid">
+    <div class="news-card">
+      <div class="news-card-img" style="background: #e8f5ee;">🎒</div>
+      <div class="news-card-body">
+        <div class="news-date">Inför läsåret 2025/2026</div>
+        <h3>Välkommen till ny termin</h3>
+        <p>Information om skolstart, schema och praktiska detaljer för det kommande läsåret. Kontakta oss för mer information.</p>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-card-img" style="background: #fdf3e0;">🌿</div>
+      <div class="news-card-body">
+        <div class="news-date">Verksamhetsutveckling</div>
+        <h3>Satsar på tryggare lärmiljö</h3>
+        <p>Skolan arbetar kontinuerligt med att förbättra studiemiljön och tryggheten för samtliga elever under läsåret.</p>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-card-img" style="background: #e6f1fb;">🍽️</div>
+      <div class="news-card-body">
+        <div class="news-date">Skolmaten</div>
+        <h3>Veckans matsedel</h3>
+        <p>Se veckans lunchmeny på skolans matsedelsportal. Smaklig måltid från köket på Våxtorpsskolan!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kontakt">
+  <div class="section-kicker">Kontakt</div>
+  <h2 class="section-title">Välkommen att höra av dig</h2>
+  <p class="section-lead">Har du frågor om skolan, anmälan eller vill veta mer om verksamheten? Kontakta oss gärna.</p>
+  <div class="kontakt-grid">
+    <div class="kontakt-info">
+      <div class="kontakt-row">
+        <div class="k-icon">📍</div>
+        <div>
+          <div class="k-label">Adress</div>
+          <div class="k-value">Våxtorp, 31280 Laholm, Halland</div>
+        </div>
+      </div>
+      <div class="kontakt-row">
+        <div class="k-icon">📞</div>
+        <div>
+          <div class="k-label">Telefon</div>
+          <div class="k-value">0430-150 82</div>
+        </div>
+      </div>
+      <div class="kontakt-row">
+        <div class="k-icon">✉️</div>
+        <div>
+          <div class="k-label">E-post</div>
+          <div class="k-value">vaxtorpsskolan@edu.laholm.se</div>
+        </div>
+      </div>
+      <div class="kontakt-row">
+        <div class="k-icon">🍽️</div>
+        <div>
+          <div class="k-label">Köket (matsedel)</div>
+          <div class="k-value">0430-150 73</div>
+        </div>
+      </div>
+      <div class="kontakt-row">
+        <div class="k-icon">🏫</div>
+        <div>
+          <div class="k-label">Skolans huvudman</div>
+          <div class="k-value">Laholms kommun · laholm.se</div>
+        </div>
+      </div>
+    </div>
+    <div class="map-block">
+      <div class="map-icon">🗺️</div>
+      <p><strong>Våxtorpsskolan</strong><br>Våxtorp, 31280 Laholm</p>
+      <p style="font-size:0.85rem;">Skolan ligger i Våxtorp i Laholms kommun, i närheten av Hallandsåsen.</p>
+      <a href="https://maps.google.com/?q=Vaxtorpsskolan+Laholm+Sweden" target="_blank">Öppna i Google Maps</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">Våxtorps<span>skolan</span></div>
+    <p>En trygg och engagerande skola i Laholms kommun där varje elev ges möjlighet att utvecklas och växa.<br><br>Kommunal grundskola, F–9.<br>Laholms kommun, Halland.</p>
+  </div>
+  <div>
+    <h4>Snabblänkar</h4>
+    <ul>
+      <li><a href="#om-oss">Om oss</a></li>
+      <li><a href="#undervisning">Undervisning</a></li>
+      <li><a href="#fritids">Fritidshem</a></li>
+      <li><a href="#nyheter">Nyheter</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Kontakt</h4>
+    <ul>
+      <li><a href="tel:0430-15082">0430-150 82</a></li>
+      <li><a href="mailto:vaxtorpsskolan@edu.laholm.se">E-post till skolan</a></li>
+      <li><a href="https://www.laholm.se" target="_blank">laholm.se</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2025 Våxtorpsskolan – Laholms kommun</span>
+  <span>Kommunal grundskola · Våxtorp, Halland</span>
+</div>
+
+</body>
+</html>
