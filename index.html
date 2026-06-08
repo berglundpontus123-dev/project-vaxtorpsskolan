@@ -2760,6 +2760,76 @@ tags.async=!0,tags.src="https://svanalytics.containers.piwik.pro/"+id+".js"+qPSt
 " id="svid12_1411d29318a26018f962d9a4_svid30_1411d29318a26018f962db53"><div id="Knapp"><!-- Knapp --></div><button class="ws-readspeaker-button" onclick="toggleReadSpeaker()">
    Lyssna
 </button></div>
+
+<!-- Spela våra roliga spel - knapp och modal -->
+<div style="margin: 16px 0;">
+  <button onclick="document.getElementById('spel-modal').style.display='flex'" style="background: #f7b731; color: #1a1a2e; border: none; border-radius: 30px; padding: 13px 28px; font-size: 1rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 14px rgba(247,183,49,0.4); display: inline-flex; align-items: center; gap: 10px; transition: transform 0.15s, box-shadow 0.15s; font-family: inherit;" onmouseover="this.style.transform='scale(1.04)';this.style.boxShadow='0 6px 20px rgba(247,183,49,0.6)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 14px rgba(247,183,49,0.4)'">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="4"/><path d="M8 12h2m-1-1v2"/><circle cx="16" cy="11.5" r=".8" fill="currentColor" stroke="none"/><circle cx="18.5" cy="13" r=".8" fill="currentColor" stroke="none"/></svg>
+    Spela våra roliga spel
+  </button>
+</div>
+
+<!-- Modal -->
+<div id="spel-modal" style="display:none; position:fixed; inset:0; background:rgba(10,10,30,0.65); z-index:9999; align-items:center; justify-content:center; backdrop-filter:blur(4px);">
+  <div style="background:#fff; border-radius:20px; padding:36px 32px 28px; max-width:420px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.3); position:relative; animation: spelPop 0.25s ease;">
+    <button onclick="spelStang()" style="position:absolute; top:14px; right:16px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#888; line-height:1;">&#x2715;</button>
+
+    <!-- Steg 1: Ange e-post -->
+    <div id="spel-steg1">
+      <div style="text-align:center; margin-bottom:20px;">
+        <div style="font-size:2.4rem; margin-bottom:8px;">🎮</div>
+        <h2 style="margin:0 0 6px; font-size:1.3rem; color:#1a1a2e;">Logga in för att spela!</h2>
+        <p style="margin:0; color:#666; font-size:0.92rem;">Ange din skolmailadress för att komma åt spelen.</p>
+      </div>
+      <label style="display:block; font-size:0.88rem; font-weight:600; color:#444; margin-bottom:6px;">E-postadress</label>
+      <input id="spel-email" type="email" placeholder="namn@vaxtorpskolan.net" style="width:100%; box-sizing:border-box; padding:11px 14px; border:2px solid #e0e0e0; border-radius:10px; font-size:1rem; outline:none; transition:border 0.2s;" onfocus="this.style.borderColor='#f7b731'" onblur="this.style.borderColor='#e0e0e0'" onkeydown="if(event.key==='Enter')spelKolla()"/>
+      <p id="spel-fel" style="display:none; color:#e74c3c; font-size:0.88rem; margin:8px 0 0; padding:8px 12px; background:#ffeaea; border-radius:8px;">⚠️ Du behöver en <strong>@vaxtorpskolan.net</strong>-adress för att spela.</p>
+      <button onclick="spelKolla()" style="margin-top:16px; width:100%; background:#f7b731; color:#1a1a2e; border:none; border-radius:10px; padding:13px; font-size:1rem; font-weight:700; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#e6a820'" onmouseout="this.style.background='#f7b731'">Fortsätt →</button>
+    </div>
+
+    <!-- Steg 2: Bekräftelse -->
+    <div id="spel-steg2" style="display:none; text-align:center;">
+      <div style="font-size:3rem; margin-bottom:16px;">📬</div>
+      <h2 style="margin:0 0 10px; font-size:1.25rem; color:#1a1a2e;">Kolla din skolmail!</h2>
+      <p style="color:#555; font-size:0.95rem; line-height:1.6;">Vi har skickat en verifikationskod till<br><strong id="spel-vald-mail" style="color:#f7b731;"></strong></p>
+      <p style="color:#777; font-size:0.87rem; margin-top:10px;">Öppna din skolmail och ange koden för att logga in och spela.</p>
+      <button onclick="spelStang()" style="margin-top:20px; background:#f7b731; color:#1a1a2e; border:none; border-radius:10px; padding:12px 28px; font-size:0.97rem; font-weight:700; cursor:pointer;">Stäng</button>
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes spelPop {
+  from { opacity:0; transform:scale(0.92) translateY(10px); }
+  to   { opacity:1; transform:scale(1) translateY(0); }
+}
+</style>
+
+<script>
+function spelKolla() {
+  var email = document.getElementById('spel-email').value.trim().toLowerCase();
+  var fel = document.getElementById('spel-fel');
+  if (!email.endsWith('@vaxtorpskolan.net')) {
+    fel.style.display = 'block';
+  } else {
+    fel.style.display = 'none';
+    document.getElementById('spel-vald-mail').textContent = email;
+    document.getElementById('spel-steg1').style.display = 'none';
+    document.getElementById('spel-steg2').style.display = 'block';
+  }
+}
+function spelStang() {
+  document.getElementById('spel-modal').style.display = 'none';
+  document.getElementById('spel-steg1').style.display = 'block';
+  document.getElementById('spel-steg2').style.display = 'none';
+  document.getElementById('spel-email').value = '';
+  document.getElementById('spel-fel').style.display = 'none';
+}
+document.getElementById('spel-modal').addEventListener('click', function(e) {
+  if (e.target === this) spelStang();
+});
+</script>
+<!-- /Spela våra roliga spel -->
 <div class="sv-vertical sv-layout ws-readspeaker-player hidden sv-template-layout" id="svid10_1411d29318a26018f962d876_svid30_1411d29318a26018f962db53"><div class="sv-custom-module sv-rs-webapp sv-skip-spacer sv-template-portlet
 " id="svid12_1411d29318a26018f962d874_svid30_1411d29318a26018f962db53"><div id="ReadSpeaker"><!-- ReadSpeaker --></div><div data-cid="2efec6f4-4118-f8bf-76d3-87f961a59816">
     
